@@ -45,7 +45,7 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
                 </div>
 
                 <Button variant="outline" size="sm" href={`/portfolio/${project.slug}`} className="w-full">
-                    View Case Study
+                    View Details
                 </Button>
             </div>
         </div>

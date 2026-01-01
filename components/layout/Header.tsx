@@ -3,14 +3,16 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/components/LanguageContext';
 
 export function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
+    const { language, setLanguage, t } = useLanguage();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -21,11 +23,15 @@ export function Header() {
     }, []);
 
     const navItems = [
-        { name: 'Home', href: '/' },
-        { name: 'Portfolio', href: '/portfolio' },
-        { name: 'Services', href: '/services' },
-        { name: 'Contact', href: '/contact' },
+        { name: t('nav_home'), href: '/' },
+        { name: t('nav_portfolio'), href: '/portfolio' },
+        { name: t('nav_services'), href: '/services' },
+        { name: t('nav_contact'), href: '/contact' },
     ];
+
+    const toggleLanguage = () => {
+        setLanguage(language === 'id' ? 'en' : 'id');
+    };
 
     return (
         <header
@@ -40,7 +46,7 @@ export function Header() {
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-8">
+                <nav className="hidden md:flex items-center gap-6">
                     {navItems.map((item) => (
                         <Link
                             key={item.href}
@@ -53,18 +59,38 @@ export function Header() {
                             {item.name}
                         </Link>
                     ))}
+
+                    <div className="h-6 w-px bg-gray-200" />
+
+                    <button
+                        onClick={toggleLanguage}
+                        className="flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-teal-600 transition-colors"
+                    >
+                        <Globe size={16} />
+                        <span className="uppercase">{language}</span>
+                    </button>
+
                     <Button size="sm" href="https://wa.me/6281234567890" isExternal>
                         Chat WhatsApp
                     </Button>
                 </nav>
 
                 {/* Mobile Toggle */}
-                <button
-                    className="md:hidden p-2 text-gray-600"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+                <div className="flex items-center gap-4 md:hidden">
+                    <button
+                        onClick={toggleLanguage}
+                        className="flex items-center gap-1.5 text-sm font-medium text-gray-600"
+                    >
+                        <span className="uppercase">{language}</span>
+                    </button>
+
+                    <button
+                        className="p-2 text-gray-600"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        {isOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Menu */}

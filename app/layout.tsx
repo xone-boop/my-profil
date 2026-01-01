@@ -29,9 +29,11 @@ export default function RootLayout({
           inter.variable
         )}
       >
-        <Layout>
-          {children}
-        </Layout>
+        <Providers>
+          <Layout>
+            {children}
+          </Layout>
+        </Providers>
       </body>
     </html>
   );
