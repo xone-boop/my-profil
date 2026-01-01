@@ -41,8 +41,8 @@ export function Header() {
             )}
         >
             <div className="container-custom flex items-center justify-between">
-                <Link href="/" className="text-xl font-bold tracking-tight text-gray-900">
-                    Dev<span className="text-teal-500">Portfolio</span>
+                <Link href="/" className="flex items-center gap-2">
+                    <img src="/images/logo.png" alt="DevPortfolio Logo" className="h-10 w-auto object-contain" />
                 </Link>
 
                 {/* Desktop Nav */}

@@ -3,13 +3,15 @@
 import { Button } from '@/components/ui/Button';
 import { Section } from '@/components/ui/Section';
 import { useLanguage } from '@/components/LanguageContext';
+import { GridPattern } from '@/components/ui/Backgrounds';
 
 export function Hero() {
     const { t } = useLanguage();
 
     return (
-        <Section className="pt-20 pb-32 md:pt-32 md:pb-40">
-            <div className="max-w-4xl mx-auto text-center">
+        <Section className="pt-20 pb-32 md:pt-32 md:pb-40 relative overflow-hidden">
+            <GridPattern />
+            <div className="max-w-4xl mx-auto text-center relative z-10">
                 <h1 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-6 text-balance animate-fade-in">
                     {t('hero_title')}
                 </h1>
